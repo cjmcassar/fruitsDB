@@ -36,19 +36,40 @@ const fruit = new Fruit(
 const personSchema = new mongoose.Schema(
 {
   name: String,
-  age: Number
+  age: Number,
+  favouriteFruit: fruitSchema
 });
 
 const Person = mongoose.model("Person", personSchema);
 
+const mango = new Fruit
+({
+  name: "Mango",
+  score: 10,
+  review: "Awesome fruit."
+});
+
+mango.save();
+
+Person.updateOne({name: "Jon"}, {favouriteFruit: mango}, function(err)
+{
+  if (err)
+  {
+    console.log(err);
+  }
+  else
+  {
+    console.log("Succesfully updated the doc");
+  }
+});
+
 const person = new Person(
 {
   name: "Jon",
-  age: 37
+  age: 22,
 });
 
 person.save();
-
 
 Fruit.find(function(err, fruits)
 {
